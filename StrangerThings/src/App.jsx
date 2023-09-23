@@ -1,51 +1,47 @@
 import React from 'react';
-import { Typography, AppBar, Card, CardActions, CardContent, CardMedia, CssBaseline, Grid, Toolbar, Container, iconClasses, Button } from '@mui/material';
+import { Typography, AppBar, CssBaseline, Toolbar } from '@mui/material';
 import { PhotoCamera } from '@mui/icons-material';
+import { useState, useEffect } from "react"
+import { fetchPosts } from "./helpers/ajaxHelpers"
+import { Outlet } from 'react-router';
 
+function NavBar() {
+  return (
+    <AppBar position="relative">
+    <Toolbar>
+      <PhotoCamera />
+      <Typography variant="h6">
+        Photo Album
+      </Typography>
+    </Toolbar>
+  </AppBar>
+  )
+}
 
+export default function App() {
 
-const App = ( ) => {
-  // const classes = useStyles();
+  const [posts, setPosts] = useState ([])
+    useEffect(()=>{
+        async function getPosts(){
+            try {
+                const posts = await fetchPosts()
+                console.log(posts)
+                setPosts(posts)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    getPosts()
+    },[])
+
+const postState = {posts, setPosts}
 
   return (
     <>
       <CssBaseline />
-      <AppBar position="relative">
-        <Toolbar>
-          <PhotoCamera />
-          <Typography variant="h6">
-            Photo Album
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      {/* <main>
-        <div className={classes.container}>
-          <Container maxWidth="sm" style={{ marginTop: '100px' }}>
-            <Typography variant="h2" align="center" color="textPrimary" gutterBottom>
-              Photo Album
-            </Typography>
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Hello everyone. This is a photo album 
-            </Typography>
-            <div>
-              <Grid container spacing={2} display="flex" justifyContent="center">
-                <Grid item>
-                  <Button variant="contained" color="primary">
-                    See my photos
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button variant="outlined" color="primary">
-                    Secondary action
-                  </Button>
-                </Grid>
-              </Grid>
-            </div>
-          </Container>
-        </div>
-      </main> */}
+     <NavBar />
+     <Outlet context={postState}/>
     </>
   );
 }
 
-export default App;
