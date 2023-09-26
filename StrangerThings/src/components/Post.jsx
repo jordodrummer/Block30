@@ -29,23 +29,40 @@ import { useOutletContext } from "react-router"
 //             </Paper>))}
 // </>)
 // }
-
-
-const Post = () =>  {
-    const {posts, setPosts} = useOutletContext()
-    const {postsId} = useParams()
-
-    const post = posts.filter((p) => p.id === postsId)
-
-    const handleDelete = () => {
-        // delete fetch
-        // setPosts(newPosts) // fetchPosts()
-    }
+const PostCard = ({post}) => {
     return (
-        <>
-            <div></div>
-        </>
+        <Paper key={post._id} elevation={3} sx={{ width: {xs: 1, md: 320}}}>
+                <Box sx={{ m: 3}}>                  
+                  <Typography variant="h3">{post.title}</Typography>
+                  <Typography sx={{ mt: 2 }}>{post.description}</Typography>
+                  <Button variant='contained' sx={{ m: 2 }}>Details</Button>
+                </Box>
+            </Paper>
     )
 }
+export default function Post(){
+    const postState = useOutletContext();
+    console.log(postState)
+return(<>            
+{postState.posts._id((post) => <PostCard key = {post._id} post={post}/>)}
+</>)
+}
 
-export default Post
+// const Post = () =>  {
+//     const {posts, setPosts} = useOutletContext()
+//     const {postsId} = useParams()
+
+//     const post = posts.filter((p) => p.id === postsId)
+
+//     const handleDelete = () => {
+//         // delete fetch
+//         // setPosts(newPosts) // fetchPosts()
+//     }
+//     return (
+//         <>
+//             <div></div>
+//         </>
+//     )
+// }
+
+// export default Post

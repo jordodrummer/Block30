@@ -3,6 +3,7 @@ import Home from './components/Home';
 import Posts from './components/Posts';
 import Post from './components/Post';
 import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 
 const COHORT_NAME = "2302-ACC-PT-WEB-PT-C";
 export const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
@@ -18,16 +19,20 @@ const rootChildren = [
         element: <Home />
     },
     {
+        path: "/signin",
+        element: <SignIn />
+    },      
+    {
+        path: "/signup",
+        element: <SignUp />
+    },  
+    {
         path: "/posts",
         element: <Posts />
     },
     {
         path: "/posts/:postsId",
         element: <Post />
-    },
-    {
-        path: "/signin",
-        element: <SignIn />
     },
 ]
 

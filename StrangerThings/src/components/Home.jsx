@@ -17,7 +17,7 @@ function Home() {
         <div >
             <Container>
                 <Typography variant="h1" sx={{ my: 4, textAlign: "center", color: "primary.main" }}>
-                    For sale locally
+                    For sale locally or shipped
                 </Typography>
                 <Typography variant="h2" sx={{ my: 2, textAlign: "center", color: "secondary.main" }}>
                     If you want to find out more, click the details button.
